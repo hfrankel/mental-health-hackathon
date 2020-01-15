@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import JokeGetter from './JokeGetter';
+import NameHeader from './NameHeader';
 
 class App extends Component {
     render() {
         return (
             <>
-                <h1>This is app</h1>
+                <NameHeader />
                 <JokeGetter />
             </>
         )
