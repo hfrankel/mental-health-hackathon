@@ -10,31 +10,34 @@ class JokeGetter extends Component {
         showPunchline: false
     }
 
-    componentDidMount() {
+    onButtonClick = () => {
         let response = axios.get('https://official-joke-api.appspot.com/jokes/programming/random')
             .then(response =>  this.setState({ 
                 setup: response.data[0].setup,
-                punchline: response.data[0].punchline
-            }));  
+                punchline: response.data[0].punchline,
+                showSetup:  true,
+                showPunchline: false
+            })); 
     }
 
-    onButtonClick = () => {
-        console.log('button clicked');
-        this.setState({ showSetup:  true });
+    showPunchline = () => {
+        this.setState({ showPunchline: true });
     }
 
     render() {
-        const { setup, showSetup } = this.state;
+        const { setup, punchline, showSetup, showPunchline } = this.state;
 
         return (
-            <div>
-                <button onClick={this.onButtonClick}>Tell me a joke</button>
-                {
-                    showSetup
-                }
-                
-                {this.state.punchline}
-            </div>
+            <>
+                <div>
+                    <button onClick={this.onButtonClick}>Tell me a joke</button>
+                    { showSetup && setup }
+                </div>
+                <div>
+                    <button onClick={this.showPunchline}>Why?</button>
+                    { showPunchline && punchline }
+                </div>
+            </>
         );
     }
 }
